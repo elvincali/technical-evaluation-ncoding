@@ -13,17 +13,20 @@
       </div>
     </div>
     <div class="row q-col-gutter-md">
-      <div class="col-md-6 col-xs-12">
-        <plan active />
-      </div>
-      <div class="col-md-6 col-xs-12">
-        <plan />
-      </div>
-      <div class="col-md-6 col-xs-12">
-        <plan />
-      </div>
-      <div class="col-md-6 col-xs-12">
-        <plan />
+      <div
+        v-for="plan in plans"
+        :key="plan.id"
+        class="col-md-6 col-xs-12"
+      >
+        <plan
+          :id="plan.id"
+          :title="plan.title"
+          :price="plan.price"
+          :offer="plan.offer"
+          :details="plan.details"
+          :active="plan.id === planSelected.id"
+          @click="selectPlan"
+        />
       </div>
     </div>
   </div>
@@ -31,6 +34,7 @@
 
 <script>
 import Plan from 'src/modules/available-courses/components/Plan';
+import { data } from 'src/@fake-db/data/enroll';
 
 export default {
   name: 'PaymentPlan',
@@ -39,10 +43,14 @@ export default {
   },
   data() {
     return {
-      plans: [
-        {},
-      ],
+      planSelected: data.plans[0],
+      plans: data.plans,
     };
+  },
+  methods: {
+    selectPlan(id) {
+      this.planSelected = this.plans.find((plan) => plan.id === id);
+    },
   },
 };
 </script>

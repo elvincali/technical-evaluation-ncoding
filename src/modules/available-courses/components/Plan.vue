@@ -1,24 +1,25 @@
 <template>
-  <div class="cursor-pointer" :class="active ? 'plan-container' : 'plan-container-inactive'">
-    <div class="q-px-lg q-py-md" :class="{ 'plan-container-layer-two': active }">
+  <div
+    class="cursor-pointer full-height"
+    :class="active ? 'plan-container' : 'plan-container-inactive'"
+    @click="$emit('click', id)"
+  >
+    <div class="q-px-lg q-py-md full-height" :class="{ 'plan-container-layer-two': active }">
       <div class="column justify-center items-center q-gutter-y-xs">
         <div class="text-h6">
-          PIF (pay in Full)
+          {{ title }}
         </div>
         <div class="text-muted">
-          $6,795
+          {{ price }}
         </div>
         <div class="title-step text-weight-bold">
-          $4,795
+          {{ offer }}
         </div>
       </div>
       <div class="separator-plan q-my-md" />
       <div class="column justify-center items-center q-gutter-y-xs">
-        <div>
-          Save $1500 in tuition
-        </div>
-        <div class="">
-          No processing fees
+        <div v-for="detail in details" :key="`none-${detail}`">
+          {{ detail }}
         </div>
       </div>
     </div>
@@ -32,6 +33,28 @@ export default {
     active: {
       type: Boolean,
       default: false,
+    },
+    id: {
+      type: String,
+      default: '',
+    },
+    price: {
+      type: String,
+      default: '',
+    },
+    offer: {
+      type: String,
+      default: '',
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    details: {
+      type: Array,
+      default() {
+        return [];
+      },
     },
   },
 };
