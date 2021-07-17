@@ -5,8 +5,11 @@ export default {
   namespaced: true,
   state() {
     return {
+      fullName: '',
       email: '',
       password: '',
+      passwordConfirm: '',
+      country: null,
     };
   },
   getters: {
@@ -14,21 +17,32 @@ export default {
   },
   mutations: {
     updateField,
+    setFullName(state, value) {
+      state.fullName = value;
+    },
     setEmail(state, value) {
       state.email = value;
     },
     setPassword(state, value) {
       state.password = value;
     },
+    setPasswordConfirm(state, value) {
+      state.passwordConfirm = value;
+    },
+    setCountry(state, value) {
+      state.country = value;
+    },
   },
   actions: {
-    async login({ state, dispatch }) {
+    async signup({ state, dispatch }) {
       try {
         const params = {
+          fullName: state.fullName,
           username: state.email,
           password: state.password,
+          countryId: state.country.id,
         };
-        const { data } = await axios.post('/login', params);
+        const { data } = await axios.post('/signup', params);
         dispatch('auth/setToken', { user: data.data.userData, token: data.data.accessToken }, { root: true });
         dispatch('reset');
       } catch (e) {
@@ -37,8 +51,11 @@ export default {
       }
     },
     reset({ commit }) {
-      commit('setEmail', null);
-      commit('setPassword', null);
+      commit('setFullName', '');
+      commit('setEmail', '');
+      commit('setPassword', '');
+      commit('setPasswordConfirm', '');
+      commit('setCountry', null);
     },
   },
 };

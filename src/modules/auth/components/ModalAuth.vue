@@ -1,12 +1,19 @@
 <template>
   <div>
     <q-btn
+      v-if="!$store.state.auth.token"
       no-caps
       class="text-bold button-menu"
+      label="Register or Login"
       @click="showModal = true"
-    >
-      Register or Login
-    </q-btn>
+    />
+    <q-btn
+      v-else
+      no-caps
+      class="text-bold button-menu"
+      label="Logout"
+      @click="logout"
+    />
     <q-dialog
       v-model="showModal"
       transition-show="slide-down"
@@ -55,7 +62,7 @@
           <div class="row">
             <div class="col-md col-xs-12 q-pa-md">
               <div class="row content-center full-height">
-                <component :is="currentActionComponent" />
+                <component :is="currentActionComponent" @submitSuccess="submitSuccess" />
               </div>
             </div>
             <div class="col-md-auto col-xs-12 q-pa-md">
@@ -86,6 +93,7 @@ import FormRegister from 'src/modules/auth/components/FormRegister';
 import FormLogin from 'src/modules/auth/components/FormLogin';
 import ExternalAuth from 'src/modules/auth/components/ExternalAuth';
 import BtnAction from 'src/modules/auth/components/BtnAction';
+import { mapActions } from 'vuex';
 
 const ACTION = { SIGNUP: 'signup', LOGIN: 'login' };
 
@@ -115,6 +123,12 @@ export default {
     },
     loginActionName() {
       return ACTION.LOGIN;
+    },
+  },
+  methods: {
+    ...mapActions('auth', ['logout']),
+    submitSuccess() {
+      this.showModal = false;
     },
   },
 };

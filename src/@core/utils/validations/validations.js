@@ -25,7 +25,10 @@ export const email = extend('email', ruleEmail);
 
 export const min = extend('min', ruleMin);
 
-export const confirmed = extend('confirmed', ruleConfirmed);
+export const confirmed = extend('confirmed', {
+  ...ruleConfirmed,
+  message: 'This field confirmation does not match',
+});
 
 export const regex = extend('regex', ruleRegex);
 

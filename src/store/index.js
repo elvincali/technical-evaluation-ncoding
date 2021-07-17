@@ -4,6 +4,8 @@ import createPersistedState from 'vuex-persistedstate';
 import SecureLS from 'secure-ls';
 // import example from './module-example'
 import login from 'src/modules/auth/store/login';
+import auth from 'src/modules/auth/store/auth';
+import signup from 'src/modules/auth/store/signup';
 
 const ls = new SecureLS({ isCompression: false });
 
@@ -22,6 +24,8 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       login,
+      auth,
+      signup,
       // example
     },
 

@@ -33,13 +33,61 @@ const data = {
   ],
 };
 
-mock.onGet('/users').reply(200, {
-  users: data.users,
-});
-
 mock.onPost('/login').reply((request) => {
   const { username, password } = JSON.parse(request.data);
-  console.log(username);
-  console.log(password);
-  return [200, {}];
+
+  const user = data.users.find((u) => u.username === username && u.password === password);
+
+  if (user) {
+    const userData = {
+      id: user.id,
+      fullName: user.fullName,
+      username: user.username,
+    };
+
+    const response = {
+      userData,
+      accessToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI4IiwianRpI...',
+    };
+
+    return [200, { data: response }];
+  }
+
+  return [422, {
+    message: 'Email or password incorrect!',
+  }];
+});
+
+mock.onPost('/signup').reply((request) => {
+  try {
+    const {
+      fullName, username, password, countryId,
+    } = JSON.parse(request.data);
+
+    const newUser = {
+      id: data.users.length + 1,
+      fullName,
+      username,
+      password,
+      countryId,
+    };
+
+    data.users.push(newUser);
+    const userData = {
+      ...newUser,
+    };
+
+    delete userData.password;
+
+    const response = {
+      userData,
+      accessToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI4IiwianRpI...',
+    };
+
+    return [200, { data: response }];
+  } catch (e) {
+    return [422, {
+      message: 'Error!',
+    }];
+  }
 });
