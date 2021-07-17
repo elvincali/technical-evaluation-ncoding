@@ -94,6 +94,7 @@ import FormLogin from 'src/modules/auth/components/FormLogin';
 import ExternalAuth from 'src/modules/auth/components/ExternalAuth';
 import BtnAction from 'src/modules/auth/components/BtnAction';
 import { mapActions } from 'vuex';
+import { mapFields } from 'vuex-map-fields';
 
 const ACTION = { SIGNUP: 'signup', LOGIN: 'login' };
 
@@ -107,11 +108,11 @@ export default {
   },
   data() {
     return {
-      showModal: false,
       currentAction: ACTION.SIGNUP,
     };
   },
   computed: {
+    ...mapFields('auth', ['showModal']),
     currentActionComponent() {
       return this.currentAction === ACTION.SIGNUP ? FormRegister : FormLogin;
     },

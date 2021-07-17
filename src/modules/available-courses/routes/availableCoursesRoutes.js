@@ -7,6 +7,7 @@ export default [
     name: BASE_NAME,
     component: () => import('../views/Index.vue'),
     meta: {
+      forAuth: true,
     },
   },
 ];

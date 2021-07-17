@@ -1,3 +1,4 @@
+import { getField, updateField } from 'vuex-map-fields';
 import { axios } from 'boot/axios';
 
 export default {
@@ -6,16 +7,22 @@ export default {
     return {
       token: null,
       user: null,
+      showModal: false,
     };
   },
   getters: {
+    getField,
   },
   mutations: {
+    updateField,
     setToken(state, value) {
       state.token = value;
     },
     setUser(state, value) {
       state.user = value;
+    },
+    setShowModal(state, value) {
+      state.showModal = value;
     },
   },
   actions: {
