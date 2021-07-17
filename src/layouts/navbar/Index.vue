@@ -64,7 +64,6 @@
       />
       <menu-item
         title="Continuing Education"
-        @click="alert('hola')"
       />
       <menu-item
         title="My Courses"

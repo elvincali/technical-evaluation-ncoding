@@ -17,7 +17,7 @@
               no-caps
               rounded
               class="q-px-lg"
-              @click="showEnrollModal = true"
+              @click="enrollModal(course)"
             />
           </template>
         </course>
@@ -30,7 +30,7 @@
 <script>
 import Course from 'src/modules/common/components/Course/Course';
 import EnrollModal from 'src/modules/available-courses/components/EnrollModal';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'Index',
@@ -51,6 +51,11 @@ export default {
   },
   methods: {
     ...mapActions('availableCourses', ['getCourses']),
+    ...mapMutations('availableCourses', ['setCourseForEnroll']),
+    enrollModal(course) {
+      this.setCourseForEnroll(course);
+      this.showEnrollModal = true;
+    },
   },
 };
 </script>

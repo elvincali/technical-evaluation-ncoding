@@ -51,6 +51,9 @@ export default {
     selectPlan(id) {
       this.planSelected = this.plans.find((plan) => plan.id === id);
     },
+    validate() {
+      return true;
+    },
   },
 };
 </script>

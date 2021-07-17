@@ -7,6 +7,8 @@ import login from 'src/modules/auth/store/login';
 import auth from 'src/modules/auth/store/auth';
 import signup from 'src/modules/auth/store/signup';
 import availableCourses from 'src/modules/available-courses/store/availableCourses';
+import enroll from 'src/modules/available-courses/store/enroll';
+import myCourses from 'src/modules/my-courses/store/myCourses';
 
 const ls = new SecureLS({ isCompression: false });
 
@@ -28,6 +30,8 @@ export default function (/* { ssrContext } */) {
       auth,
       signup,
       availableCourses,
+      enroll,
+      myCourses,
       // example
     },
 

@@ -12,7 +12,7 @@ const data = {
       id: 2,
       category: 'JavaScript',
       title: 'JavaScript Basic',
-      enrolled: false,
+      enrolled: true,
     },
     {
       id: 3,
@@ -36,7 +36,7 @@ const data = {
       id: 6,
       category: 'Vue.js',
       title: 'Vue.js Advanced',
-      enrolled: false,
+      enrolled: true,
     },
   ],
 };

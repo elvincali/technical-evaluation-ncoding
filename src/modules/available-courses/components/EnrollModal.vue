@@ -12,7 +12,7 @@
       <div class="q-px-md-xl q-px-xs-md q-pt-md">
         <div class="flex justify-center q-mt-xl q-mb-md">
           <div class="text-h5 text-center text-weight-bold">
-            Application Process - Java Advanced
+            Application Process - {{ $store.state.availableCourses.courseForEnroll.title }}
           </div>
         </div>
         <div class="row q-my-md">
@@ -47,8 +47,8 @@
             </span>
           </div>
         </div>
-        <keep-alive>
-          <component :is="stepComponent" />
+        <keep-alive ref="enr">
+          <component :is="stepComponent" ref="step" />
         </keep-alive>
         <div style="height: 130px"></div>
         <q-toolbar
@@ -77,6 +77,7 @@
 
 <script>
 import PaymentPlan from 'src/modules/available-courses/components/PaymentPlan';
+import { mapActions } from 'vuex';
 import PersonalDetails from './PersonalDetails';
 
 const STEP = { PERSONAL_INFO: 'personal-info', PAYMENT_PLAN: 'payment-plan' };
@@ -110,11 +111,18 @@ export default {
     },
   },
   methods: {
-    nextStep() {
+    ...mapActions('enroll', ['enroll']),
+    async nextStep() {
+      const formStepSuccess = await this.$refs.step.validate();
+      if (!formStepSuccess) return;
+
       const positionIndex = this.steps.findIndex((step) => step === this.stepCurrent);
       const isCompletedAllSteps = this.steps.length === (positionIndex + 1);
+
       if (isCompletedAllSteps) {
         // complete all, execute submit!
+        await this.enroll();
+        this.$router.push({ name: 'my-courses' });
         this.closeModal();
         return;
       }

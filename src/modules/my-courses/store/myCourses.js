@@ -5,23 +5,17 @@ export default {
   state() {
     return {
       courses: [],
-      courseForEnroll: null,
     };
-  },
-  getters: {
   },
   mutations: {
     setCourses(state, value) {
       state.courses = value;
     },
-    setCourseForEnroll(state, value) {
-      state.courseForEnroll = value;
-    },
   },
   actions: {
     async getCourses({ commit }) {
       try {
-        const { data } = await axios.get('/courses-available');
+        const { data } = await axios.get('/my-courses');
         commit('setCourses', data.data);
       } catch (e) {
         console.log(e);

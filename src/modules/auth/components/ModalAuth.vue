@@ -12,7 +12,7 @@
       no-caps
       class="text-bold button-menu"
       label="Logout"
-      @click="logout"
+      @click="onLogout"
     />
     <q-dialog
       v-model="showModal"
@@ -127,6 +127,10 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['logout']),
+    onLogout() {
+      this.logout();
+      this.$router.push({ name: 'home' });
+    },
     submitSuccess() {
       this.showModal = false;
     },
