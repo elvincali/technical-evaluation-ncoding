@@ -3,14 +3,14 @@
     <div class="relative-position">
       <div class="img-default">
         <q-badge
-          label="Javascript"
+          :label="category"
           text-color="black"
           class="q-badge--floating"
         />
       </div>
     </div>
     <div class="text-weight-bold">
-      Java Advanced
+      {{ title }}
     </div>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -43,6 +43,16 @@
 <script>
 export default {
   name: 'Course',
+  props: {
+    category: {
+      type: String,
+      default: 'Java',
+    },
+    title: {
+      type: String,
+      default: 'Java Advanced',
+    },
+  },
 };
 </script>
 
