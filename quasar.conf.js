@@ -86,6 +86,9 @@ module.exports = function (/* ctx */) {
       lang: 'en-us', // Quasar language pack
       cssAddon: true,
       config: {
+        notify: {
+          position: 'top-right',
+        },
       },
 
       // Possible values for "importStrategy":
@@ -101,7 +104,9 @@ module.exports = function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: [],
+      plugins: [
+        'Notify',
+      ],
     },
 
     // animations: 'all', // --- includes all animations
