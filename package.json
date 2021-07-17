@@ -15,7 +15,8 @@
     "axios-mock-adapter": "^1.19.0",
     "core-js": "^3.6.5",
     "quasar": "^1.0.0",
-    "vuex-map-fields": "^1.4.1"
+    "vee-validate": "^3.4.10",
+    "vuex-map-fields": "^1.4.1",
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",
