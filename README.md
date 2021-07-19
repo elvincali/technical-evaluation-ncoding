@@ -22,5 +22,5 @@ npm run lint
 quasar build
 ```
 
-### Customize the configuration
-See [Configuring quasar.conf.js](https://v1.quasar.dev/quasar-cli/quasar-conf-js).
+### Fake-DB
+Visit the src/@fake-db/data directory to see the fake api test data.
