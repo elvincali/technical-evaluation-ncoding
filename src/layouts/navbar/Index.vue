@@ -52,22 +52,23 @@
     </q-drawer>
     <div
       class="text-black text-h3 text-weight-bold cursor-pointer"
-      @click="$router.push({ name: 'home' })"
     >
-      Logo
+      <router-link tag="span" :to="{ name: 'home' }">
+        Logo
+      </router-link>
     </div>
     <div class="desktop-only text-center text-black flex justify-center q-gutter-xl">
       <menu-item
         active
         title="Available Courses"
-        @click.native="$router.push({ name: 'available-courses' })"
+        :to="{ name: 'available-courses' }"
       />
       <menu-item
         title="Continuing Education"
       />
       <menu-item
         title="My Courses"
-        @click.native="$router.push({ name: 'my-courses' })"
+        :to="{ name: 'my-courses' }"
       />
       <menu-item
         title="Community"

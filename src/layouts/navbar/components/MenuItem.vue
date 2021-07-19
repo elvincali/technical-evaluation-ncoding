@@ -4,9 +4,13 @@
     @mouseover="showMenu = true"
     @mouseout="showMenu = false"
   >
-    <span :class="{ 'text-weight-bold': active }">
+    <router-link
+      tag="span"
+      :class="{ 'text-weight-bold': active }"
+      :to="to"
+    >
       {{ title }}
-    </span>
+    </router-link>
     <q-icon
       :name="nameIconArrow"
       size="sm"
@@ -47,6 +51,10 @@ export default {
     active: {
       type: Boolean,
       default: false,
+    },
+    to: {
+      type: [String, Object],
+      default: '#',
     },
   },
   data() {
