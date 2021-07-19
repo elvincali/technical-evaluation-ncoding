@@ -134,7 +134,7 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
-import { mapFields } from 'vuex-map-fields';
+import { sync } from 'vuex-pathify';
 
 // eslint-disable-next-line no-unused-vars
 import { email, required } from 'src/@core/utils/validations/validations';
@@ -155,7 +155,7 @@ export default {
     };
   },
   computed: {
-    ...mapFields('enroll', ['dateOfBirth', 'gender', 'address', 'phoneNumber', 'preferredLanguage', 'educationLevel']),
+    ...sync('enroll', ['dateOfBirth', 'gender', 'address', 'phoneNumber', 'preferredLanguage', 'educationLevel']),
   },
   methods: {
     validate() {

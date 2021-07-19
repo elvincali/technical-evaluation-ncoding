@@ -30,7 +30,7 @@
 <script>
 import Course from 'src/modules/common/components/Course/Course';
 import EnrollModal from 'src/modules/available-courses/components/EnrollModal';
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { get, sync, call } from 'vuex-pathify';
 
 export default {
   name: 'Index',
@@ -44,16 +44,16 @@ export default {
     };
   },
   computed: {
-    ...mapState('availableCourses', ['courses']),
+    ...get('availableCourses', ['courses']),
+    ...sync('availableCourses', ['courseForEnroll']),
   },
   created() {
     this.getCourses();
   },
   methods: {
-    ...mapActions('availableCourses', ['getCourses']),
-    ...mapMutations('availableCourses', ['setCourseForEnroll']),
+    ...call('availableCourses', ['getCourses']),
     enrollModal(course) {
-      this.setCourseForEnroll(course);
+      this.courseForEnroll = course;
       this.showEnrollModal = true;
     },
   },

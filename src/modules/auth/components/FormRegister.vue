@@ -108,8 +108,7 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import { mapFields } from 'vuex-map-fields';
-import { mapActions } from 'vuex';
+import { sync, call } from 'vuex-pathify';
 
 import {
   // eslint-disable-next-line no-unused-vars
@@ -135,10 +134,10 @@ export default {
     };
   },
   computed: {
-    ...mapFields('signup', ['fullName', 'email', 'password', 'passwordConfirm', 'country']),
+    ...sync('signup', ['fullName', 'email', 'password', 'passwordConfirm', 'country']),
   },
   methods: {
-    ...mapActions('signup', ['signup']),
+    ...call('signup', ['signup']),
     async onSubmit() {
       try {
         await this.signup();

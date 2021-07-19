@@ -93,8 +93,7 @@ import FormRegister from 'src/modules/auth/components/FormRegister';
 import FormLogin from 'src/modules/auth/components/FormLogin';
 import ExternalAuth from 'src/modules/auth/components/ExternalAuth';
 import BtnAction from 'src/modules/auth/components/BtnAction';
-import { mapActions } from 'vuex';
-import { mapFields } from 'vuex-map-fields';
+import { sync, call } from 'vuex-pathify';
 
 const ACTION = { SIGNUP: 'signup', LOGIN: 'login' };
 
@@ -112,7 +111,7 @@ export default {
     };
   },
   computed: {
-    ...mapFields('auth', ['showModal']),
+    ...sync('auth', ['showModal']),
     currentActionComponent() {
       return this.currentAction === ACTION.SIGNUP ? FormRegister : FormLogin;
     },
@@ -127,7 +126,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions('auth', ['logout']),
+    ...call('auth', ['logout']),
     onLogout() {
       this.logout();
       this.$router.push({ name: 'home' });

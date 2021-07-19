@@ -17,7 +17,7 @@
     "quasar": "^1.0.0",
     "secure-ls": "^1.2.6",
     "vee-validate": "^3.4.10",
-    "vuex-map-fields": "^1.4.1",
+    "vuex-pathify": "^1.4.5",
     "vuex-persistedstate": "^3.2.0"
   },
   "devDependencies": {

@@ -60,8 +60,7 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import { mapFields } from 'vuex-map-fields';
-import { mapActions } from 'vuex';
+import { sync, call } from 'vuex-pathify';
 
 // eslint-disable-next-line no-unused-vars
 import { email, required } from 'src/@core/utils/validations/validations';
@@ -77,10 +76,10 @@ export default {
     };
   },
   computed: {
-    ...mapFields('login', ['email', 'password']),
+    ...sync('login', ['email', 'password']),
   },
   methods: {
-    ...mapActions('login', ['login']),
+    ...call('login', ['login']),
     async onSubmit() {
       try {
         await this.login();

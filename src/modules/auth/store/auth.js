@@ -1,39 +1,30 @@
-import { getField, updateField } from 'vuex-map-fields';
+/* eslint-disable no-shadow */
+import { make } from 'vuex-pathify';
 import { axios } from 'boot/axios';
+
+const state = () => ({
+  token: null,
+  user: null,
+  showModal: false,
+});
+
+const mutations = make.mutations(state);
+
+const actions = {
+  setToken({ commit }, { token, user }) {
+    commit('SET_TOKEN', token);
+    commit('SET_USER', user);
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  logout({ commit }) {
+    commit('SET_TOKEN', null);
+    commit('SET_USER', null);
+  },
+};
 
 export default {
   namespaced: true,
-  state() {
-    return {
-      token: null,
-      user: null,
-      showModal: false,
-    };
-  },
-  getters: {
-    getField,
-  },
-  mutations: {
-    updateField,
-    setToken(state, value) {
-      state.token = value;
-    },
-    setUser(state, value) {
-      state.user = value;
-    },
-    setShowModal(state, value) {
-      state.showModal = value;
-    },
-  },
-  actions: {
-    setToken({ commit }, { token, user }) {
-      commit('setToken', token);
-      commit('setUser', user);
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-    },
-    logout({ commit }) {
-      commit('setToken', null);
-      commit('setUser', null);
-    },
-  },
+  state,
+  mutations,
+  actions,
 };

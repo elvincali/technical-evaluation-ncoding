@@ -27,7 +27,7 @@
 
 <script>
 import Course from 'src/modules/common/components/Course/Course';
-import { mapState, mapActions } from 'vuex';
+import { get, call } from 'vuex-pathify';
 
 export default {
   name: 'Index',
@@ -35,13 +35,13 @@ export default {
     Course,
   },
   computed: {
-    ...mapState('myCourses', ['courses']),
+    ...get('myCourses', ['courses']),
   },
   created() {
     this.getCourses();
   },
   methods: {
-    ...mapActions('myCourses', ['getCourses']),
+    ...call('myCourses', ['getCourses']),
   },
 };
 </script>
