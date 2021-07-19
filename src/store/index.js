@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 import SecureLS from 'secure-ls';
+import pathify from 'vuex-pathify';
 // import example from './module-example'
 import login from 'src/modules/auth/store/login';
 import auth from 'src/modules/auth/store/auth';
@@ -46,6 +47,7 @@ export default function (/* { ssrContext } */) {
           removeItem: (key) => ls.remove(key),
         },
       }),
+      pathify.plugin,
     ],
   });
 

@@ -29,7 +29,7 @@ export default function ({ store }) {
   Router.beforeEach((to, from, next) => {
     const isAuthenticated = store.state.auth.token;
     if (to.meta.forAuth && !isAuthenticated) {
-      store.commit('auth/setShowModal', true);
+      store.commit('auth/SET_SHOW_MODAL', true);
       next(false);
     } else next();
   });

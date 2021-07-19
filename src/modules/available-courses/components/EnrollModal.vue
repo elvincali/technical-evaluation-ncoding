@@ -77,7 +77,7 @@
 
 <script>
 import PaymentPlan from 'src/modules/available-courses/components/PaymentPlan';
-import { mapActions } from 'vuex';
+import { call } from 'vuex-pathify';
 import PersonalDetails from './PersonalDetails';
 
 const STEP = { PERSONAL_INFO: 'personal-info', PAYMENT_PLAN: 'payment-plan' };
@@ -111,7 +111,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions('enroll', ['enroll']),
+    ...call('enroll', ['enroll']),
     async nextStep() {
       const formStepSuccess = await this.$refs.step.validate();
       if (!formStepSuccess) return;
