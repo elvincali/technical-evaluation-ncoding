@@ -1,19 +1,6 @@
 <template>
   <div>
-    <q-btn
-      v-if="!$store.state.auth.token"
-      no-caps
-      class="text-bold button-menu"
-      label="Register or Login"
-      @click="showModal = true"
-    />
-    <q-btn
-      v-else
-      no-caps
-      class="text-bold button-menu"
-      label="Logout"
-      @click="onLogout"
-    />
+    <btn-auth />
     <q-dialog
       v-model="showModal"
       transition-show="slide-down"
@@ -62,7 +49,7 @@
           <div class="row">
             <div class="col-md col-xs-12 q-pa-md">
               <div class="row content-center full-height">
-                <component :is="currentActionComponent" @submitSuccess="submitSuccess" />
+                <component :is="currentActionComponent" @submitSuccess="showModal = false" />
               </div>
             </div>
             <div class="col-md-auto col-xs-12 q-pa-md">
@@ -93,9 +80,12 @@ import FormRegister from 'src/modules/auth/components/FormRegister';
 import FormLogin from 'src/modules/auth/components/FormLogin';
 import ExternalAuth from 'src/modules/auth/components/ExternalAuth';
 import BtnAction from 'src/modules/auth/components/BtnAction';
-import { sync, call } from 'vuex-pathify';
+import BtnAuth from 'src/modules/auth/components/BtnAuth';
+import { sync } from 'vuex-pathify';
 
 const ACTION = { SIGNUP: 'signup', LOGIN: 'login' };
+
+const TITLE = { SIGNUP: 'Register as a new student', LOGIN: 'Are you an existing student?' };
 
 export default {
   name: 'ModalAuth',
@@ -104,6 +94,7 @@ export default {
     FormLogin,
     ExternalAuth,
     BtnAction,
+    BtnAuth,
   },
   data() {
     return {
@@ -116,7 +107,7 @@ export default {
       return this.currentAction === ACTION.SIGNUP ? FormRegister : FormLogin;
     },
     title() {
-      return this.currentAction === ACTION.SIGNUP ? 'Register as a new student' : 'Are you an existing student?';
+      return this.currentAction === ACTION.SIGNUP ? TITLE.SIGNUP : TITLE.LOGIN;
     },
     signupActionName() {
       return ACTION.SIGNUP;
@@ -126,24 +117,11 @@ export default {
     },
   },
   methods: {
-    ...call('auth', ['logout']),
-    onLogout() {
-      this.logout();
-      this.$router.push({ name: 'home' });
-    },
-    submitSuccess() {
-      this.showModal = false;
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-  .button-menu {
-    background: #BD3C4B;
-    color: white
-  }
-
   .my-card {
     margin-top: 42px;
     border-radius: 12px !important;
